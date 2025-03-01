@@ -6,10 +6,7 @@ import org.beni.restapi.services.impl.ServiceClasse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/gestion/classe")
@@ -26,5 +23,10 @@ public class ClasseController {
 
        ClasseDto c =  classeService.createClasse(classeDto);
        return  new ResponseEntity<>(c, HttpStatus.CREATED);
+    }
+    @GetMapping("{id}")
+    public ResponseEntity<ClasseDto> getClasse(@PathVariable long id) {
+       ClasseDto c =  classeService.getClasseBYId(id);
+       return new ResponseEntity<>(c, HttpStatus.OK);
     }
 }

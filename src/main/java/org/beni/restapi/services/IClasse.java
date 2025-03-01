@@ -4,4 +4,5 @@ import org.beni.restapi.dto.ClasseDto;
 
 public interface IClasse {
     ClasseDto createClasse(ClasseDto classeDto);
+    ClasseDto getClasseBYId(long idClasse);
 }

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ServiceClasse  implements IClasse {
     private final ClasseRepository classeRepository;
@@ -24,5 +26,11 @@ public class ServiceClasse  implements IClasse {
         c.setNomClasse(classeDto.getNomClasse());
         classeRepository.save(c);
         return ClasseMapper.maptoClassDto(c);
+    }
+
+    @Override
+    public ClasseDto getClasseBYId(long idClasse) {
+           Optional<Classe> c  =   classeRepository.findById(idClasse);
+           return c.map(ClasseMapper::maptoClassDto).orElse(null);
     }
 }
