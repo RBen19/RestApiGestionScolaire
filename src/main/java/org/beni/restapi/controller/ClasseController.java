@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/gestion/classe")
 public class ClasseController {
@@ -28,5 +30,10 @@ public class ClasseController {
     public ResponseEntity<ClasseDto> getClasse(@PathVariable long id) {
        ClasseDto c =  classeService.getClasseBYId(id);
        return new ResponseEntity<>(c, HttpStatus.OK);
+    }
+    @GetMapping
+    public ResponseEntity<List<ClasseDto>> getAllClasses() {
+        List<ClasseDto> classeList = classeService.getAllClasses();
+        return new ResponseEntity<>(classeList, HttpStatus.OK);
     }
 }

@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ServiceClasse  implements IClasse {
@@ -32,5 +34,11 @@ public class ServiceClasse  implements IClasse {
     public ClasseDto getClasseBYId(long idClasse) {
            Optional<Classe> c  =   classeRepository.findById(idClasse);
            return c.map(ClasseMapper::maptoClassDto).orElse(null);
+    }
+
+    @Override
+    public List<ClasseDto> getAllClasses() {
+       List<Classe> classeList = classeRepository.findAll();
+        return classeList.stream().map(ClasseMapper::maptoClassDto).collect(Collectors.toList());
     }
 }
