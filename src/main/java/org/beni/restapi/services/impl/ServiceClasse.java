@@ -41,4 +41,27 @@ public class ServiceClasse  implements IClasse {
        List<Classe> classeList = classeRepository.findAll();
         return classeList.stream().map(ClasseMapper::maptoClassDto).collect(Collectors.toList());
     }
+
+    @Override
+    public boolean deleteClasse(long idClasse) {
+        boolean delete = false;
+        Classe c = classeRepository.findById(idClasse).get();
+        classeRepository.delete(c);
+        delete = true;
+        return delete;
+    }
+
+    @Override
+    public boolean updateClasse(ClasseDto classeDto) {
+        boolean update = false;
+        Optional<Classe> c = classeRepository.findById(classeDto.getIdClasse());
+        if (c.isPresent()) {
+            Classe classe = ClasseMapper.maptoClasseEntity(classeDto);
+            classe.setCodeClasse(classeDto.getCodeClasse());
+            classe.setNomClasse(classeDto.getNomClasse());
+            classeRepository.save(classe);
+            update = true;
+        }
+        return update;
+    }
 }

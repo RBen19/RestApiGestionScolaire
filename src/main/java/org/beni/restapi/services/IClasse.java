@@ -8,4 +8,6 @@ public interface IClasse {
     ClasseDto createClasse(ClasseDto classeDto);
     ClasseDto getClasseBYId(long idClasse);
     List<ClasseDto> getAllClasses();
+    boolean deleteClasse(long idClasse);
+    boolean updateClasse(ClasseDto classeDto);
 }

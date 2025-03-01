@@ -5,6 +5,7 @@ import org.beni.restapi.dto.ClasseDto;
 import org.beni.restapi.services.impl.ServiceClasse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +36,16 @@ public class ClasseController {
     public ResponseEntity<List<ClasseDto>> getAllClasses() {
         List<ClasseDto> classeList = classeService.getAllClasses();
         return new ResponseEntity<>(classeList, HttpStatus.OK);
+    }
+    @DeleteMapping("{id}")
+    public ResponseEntity<ClasseDto> deleteClasse(@PathVariable long id) {
+        classeService.deleteClasse(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping()
+    public ResponseEntity<ClasseDto> updateClasse(@RequestBody ClasseDto classeDto) {
+         classeService.updateClasse(classeDto);
+       return new ResponseEntity<>(classeDto, HttpStatusCode.valueOf(203));
     }
 }
