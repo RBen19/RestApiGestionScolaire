@@ -55,4 +55,16 @@ public class ServiceEtudiant implements IEtudiant {
                 .map(EtudiantMapper::maptoEtudiantDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public boolean deleteEtudiantById(Long id) {
+        boolean delete = false;
+        Optional<Etudiant> e = etudiantRepository.findById(id);
+        if (e.isPresent()) {
+            etudiantRepository.delete(e.get());
+            etudiantRepository.flush();
+            delete = true;
+        }
+        return delete;
+    }
 }
