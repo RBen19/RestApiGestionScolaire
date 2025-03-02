@@ -67,4 +67,20 @@ public class ServiceEtudiant implements IEtudiant {
         }
         return delete;
     }
+
+    @Override
+    public EtudiantDto updateEtudiant(EtudiantDto etudiantDto) {
+        Optional<Etudiant> e  = etudiantRepository.findById(etudiantDto.getIdEtudiant());
+        Etudiant etd  = null;
+        if (e.isPresent()) {
+            Etudiant etudiant = EtudiantMapper.maptoEtudiantEntity(etudiantDto);
+            etudiant.setNom(etudiantDto.getNom());
+            etudiant.setPrenom(etudiantDto.getPrenom());
+            etudiant.setEmail(etudiantDto.getEmail());
+            etudiant.setMatricule(etudiantDto.getMatricule());
+            etd = etudiant;
+            etudiantRepository.saveAndFlush(etudiant);
+        }
+        return  EtudiantMapper.maptoEtudiantDto(etd);
+    }
 }

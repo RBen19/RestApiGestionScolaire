@@ -39,7 +39,11 @@ public class EtudiantController {
     public ResponseEntity<EtudiantDto> deleteEtudiantById(@PathVariable Long id) {
         serviceEtudiant.deleteEtudiantById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
+    }
+    @PutMapping
+    public ResponseEntity<EtudiantDto> updateEtudiant(@RequestBody EtudiantDto etudiantDto) {
+       EtudiantDto e =  serviceEtudiant.updateEtudiant(etudiantDto);
+       return new ResponseEntity<>(e, HttpStatus.OK);
     }
 
 }
