@@ -27,6 +27,8 @@ public class ServiceClasse  implements IClasse {
         c.setCodeClasse(classeDto.getCodeClasse());
         c.setNomClasse(classeDto.getNomClasse());
         classeRepository.save(c);
+        classeRepository.flush();
+
         return ClasseMapper.maptoClassDto(c);
     }
 
@@ -47,6 +49,8 @@ public class ServiceClasse  implements IClasse {
         boolean delete = false;
         Classe c = classeRepository.findById(idClasse).get();
         classeRepository.delete(c);
+        classeRepository.flush();
+
         delete = true;
         return delete;
     }
@@ -60,6 +64,7 @@ public class ServiceClasse  implements IClasse {
             classe.setCodeClasse(classeDto.getCodeClasse());
             classe.setNomClasse(classeDto.getNomClasse());
             classeRepository.save(classe);
+            classeRepository.flush();
             update = true;
         }
         return update;

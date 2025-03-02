@@ -19,6 +19,7 @@ public class Classe {
     @Column(length = 50)
     private String nomClasse;
 
+
     public long getIdClasse() {
         return idClasse;
     }
