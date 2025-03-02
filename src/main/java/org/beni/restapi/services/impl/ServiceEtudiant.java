@@ -11,7 +11,9 @@ import org.beni.restapi.services.IEtudiant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ServiceEtudiant implements IEtudiant {
@@ -44,5 +46,13 @@ public class ServiceEtudiant implements IEtudiant {
     public EtudiantDto getEtudiantById(Long id) {
         Optional<Etudiant> e = etudiantRepository.findById(id);
         return e.map(EtudiantMapper::maptoEtudiantDto).orElse(null);
+    }
+
+    @Override
+    public List<EtudiantDto> getAllEtudiants() {
+        List<Etudiant> etudiants = etudiantRepository.findAll();
+      return  etudiants.stream()
+                .map(EtudiantMapper::maptoEtudiantDto)
+                .collect(Collectors.toList());
     }
 }

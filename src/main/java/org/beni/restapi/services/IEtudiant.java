@@ -7,5 +7,5 @@ import java.util.List;
 public interface IEtudiant {
     EtudiantDto createEtudiant(EtudiantDto etudiantDto);
     EtudiantDto getEtudiantById(Long id);
-
+    List<EtudiantDto> getAllEtudiants();
 }

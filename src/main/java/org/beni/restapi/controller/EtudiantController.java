@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/gestion/etudiant")
 public class EtudiantController {
@@ -26,6 +28,11 @@ public class EtudiantController {
     @GetMapping("{id}")
     public ResponseEntity<EtudiantDto> getEtudiantById(@PathVariable Long id) {
         EtudiantDto e = serviceEtudiant.getEtudiantById(id);
+        return new ResponseEntity<>(e, HttpStatus.OK);
+    }
+    @GetMapping
+    public ResponseEntity<List<EtudiantDto>> getAllEtudiants() {
+        List<EtudiantDto> e = serviceEtudiant.getAllEtudiants();
         return new ResponseEntity<>(e, HttpStatus.OK);
     }
 
