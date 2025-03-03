@@ -30,7 +30,7 @@ public class EtudiantController {
         EtudiantDto e = serviceEtudiant.getEtudiantById(id);
         return new ResponseEntity<>(e, HttpStatus.OK);
     }
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<EtudiantDto>> getAllEtudiants() {
         List<EtudiantDto> e = serviceEtudiant.getAllEtudiants();
         return new ResponseEntity<>(e, HttpStatus.OK);

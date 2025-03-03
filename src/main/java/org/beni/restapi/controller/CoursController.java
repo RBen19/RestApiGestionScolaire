@@ -22,7 +22,7 @@ public class CoursController {
        CoursDto c =  serviceCours.createCours(coursDto);
         return new ResponseEntity<>(c, HttpStatus.CREATED);
     }
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<CoursDto>> getAllCours() {
         List<CoursDto> coursDtoList = serviceCours.getAllCOurs();
         return new ResponseEntity<>(coursDtoList, HttpStatus.OK);

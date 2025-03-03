@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/gestion/classe")
+@CrossOrigin
 public class ClasseController {
 
     @Autowired
@@ -32,7 +33,7 @@ public class ClasseController {
        ClasseDto c =  classeService.getClasseBYId(id);
        return new ResponseEntity<>(c, HttpStatus.OK);
     }
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<ClasseDto>> getAllClasses() {
         List<ClasseDto> classeList = classeService.getAllClasses();
         return new ResponseEntity<>(classeList, HttpStatus.OK);

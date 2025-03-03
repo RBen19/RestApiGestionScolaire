@@ -29,7 +29,7 @@ public class ProfController {
        ProfDto p =  serviceProf.getProfById(id);
        return new ResponseEntity<>(p, HttpStatus.OK);
     }
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<ProfDto>> getAllProf() {
         List<ProfDto> profs = serviceProf.getAllProf();
         return new ResponseEntity<>(profs, HttpStatus.OK);
