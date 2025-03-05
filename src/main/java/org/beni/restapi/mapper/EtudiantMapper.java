@@ -8,7 +8,7 @@ import org.beni.restapi.model.Etudiant;
 
 public class EtudiantMapper {
     public static EtudiantDto maptoEtudiantDto(Etudiant etudiant) {
-        return  new EtudiantDto(
+        return new EtudiantDto(
                 etudiant.getIdEtudiant(),
                 etudiant.getMatricule(),
                 etudiant.getNom(),

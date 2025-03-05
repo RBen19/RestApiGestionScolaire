@@ -1,17 +1,21 @@
 package org.beni.restapi.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-@AllArgsConstructor
-@NoArgsConstructor
-
 public class ProfDto {
     private Long idProf;
     private String nom;
     private String prenom;
     private String email;
     private String matriculeProf;
+
+    public ProfDto(Long idProf, String prenom, String nom, String email, String matriculeProf) {}
+
+    public ProfDto(String nom, String prenom, String email, String matriculeProf) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.matriculeProf = matriculeProf;
+
+    }
 
     public Long getIdProf() {
         return idProf;

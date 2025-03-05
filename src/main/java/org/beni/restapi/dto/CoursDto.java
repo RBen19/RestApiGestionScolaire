@@ -4,13 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.beni.restapi.model.Prof;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class CoursDto {
     private long idCours;
     private String libelleCours;
     private String codeCours;
     private Prof prof;
+
+    public CoursDto(long idCours, String libelleCours, String codeCours, Prof prof) {
+        this.idCours = idCours;
+        this.libelleCours = libelleCours;
+        this.codeCours = codeCours;
+        this.prof = prof;
+    }
 
     public long getIdCours() {
         return idCours;

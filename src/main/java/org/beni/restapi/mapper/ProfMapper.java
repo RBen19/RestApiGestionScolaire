@@ -1,17 +1,14 @@
 package org.beni.restapi.mapper;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.beni.restapi.dto.ProfDto;
 import org.beni.restapi.model.Prof;
 
-
 public class ProfMapper {
     public static ProfDto mapToDto(Prof prof) {
-        return new ProfDto(
+        return new ProfDto (
                 prof.getIdProf(),
-                prof.getNom(),
                 prof.getPrenom(),
+                prof.getNom(),
                 prof.getEmail(),
                 prof.getMatriculeProf()
         );

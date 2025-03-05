@@ -27,15 +27,15 @@ public class ServiceCours implements ICours {
 
     @Override
     public CoursDto createCours(CoursDto coursDto) {
-      Cours cours = CoursMapper.mapDtoToCoursEntity(coursDto);
-      cours.setCodeCours(coursDto.getCodeCours());
-      cours.setLibelleCours(coursDto.getLibelleCours());
-      Optional<Prof> p = profRepository.findById(cours.getProf().getIdProf());
-      if(p.isPresent()) {
-          cours.setProf(p.get());
-      }
-     Cours savedCours =  coursRepository.saveAndFlush(cours);
-      return CoursMapper.mapCoursToDto(savedCours);
+        Cours cours = CoursMapper.mapDtoToCoursEntity(coursDto);
+        cours.setCodeCours(coursDto.getCodeCours());
+        cours.setLibelleCours(coursDto.getLibelleCours());
+        Optional<Prof> p = profRepository.findById(cours.getProf().getIdProf());
+        if(p.isPresent()) {
+            cours.setProf(p.get());
+        }
+        Cours savedCours = coursRepository.saveAndFlush(cours);
+        return CoursMapper.mapCoursToDto(savedCours);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ServiceCours implements ICours {
     @Override
     public List<CoursDto> getAllCOurs() {
         List<Cours> coursList = coursRepository.findAll();
-     return   coursList.stream()
+        return coursList.stream()
                 .map(CoursMapper::mapCoursToDto)
                 .collect(Collectors.toList());
     }
@@ -65,12 +65,12 @@ public class ServiceCours implements ICours {
         Cours cours = CoursMapper.mapDtoToCoursEntity(coursDto);
         cours.setCodeCours(coursDto.getCodeCours());
         cours.setLibelleCours(coursDto.getLibelleCours());
-      Optional<Prof> p =   profRepository.findById(cours.getProf().getIdProf());
-      if(p.isPresent()) {
-          cours.setProf(p.get());
-      }
-      Cours savedCours = coursRepository.saveAndFlush(cours);
-      return CoursMapper.mapCoursToDto(savedCours);
+        Optional<Prof> p = profRepository.findById(cours.getProf().getIdProf());
+        if(p.isPresent()) {
+            cours.setProf(p.get());
+        }
+        Cours savedCours = coursRepository.saveAndFlush(cours);
+        return CoursMapper.mapCoursToDto(savedCours);
 
 
     }

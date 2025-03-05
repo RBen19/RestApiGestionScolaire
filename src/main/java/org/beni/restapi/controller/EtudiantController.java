@@ -1,8 +1,7 @@
 package org.beni.restapi.controller;
 
-
 import org.beni.restapi.dto.EtudiantDto;
-import org.beni.restapi.services.impl.ServiceEtudiant;
+import org.beni.restapi.services.IEtudiant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,38 +11,46 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/gestion/etudiant")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class EtudiantController {
 
+    private final IEtudiant etudiantService;
+
     @Autowired
-    public EtudiantController(ServiceEtudiant serviceEtudiant) {
-        this.serviceEtudiant = serviceEtudiant;
+    public EtudiantController(IEtudiant etudiantService) {
+        this.etudiantService = etudiantService;
     }
-    private ServiceEtudiant serviceEtudiant;
 
     @PostMapping
-    public ResponseEntity<EtudiantDto> addClasse(@RequestBody EtudiantDto etudiantDto) {
-        EtudiantDto e = serviceEtudiant.createEtudiant(etudiantDto);
-        return  new ResponseEntity<>(e, HttpStatus.CREATED);
-    }
-    @GetMapping("{id}")
-    public ResponseEntity<EtudiantDto> getEtudiantById(@PathVariable Long id) {
-        EtudiantDto e = serviceEtudiant.getEtudiantById(id);
-        return new ResponseEntity<>(e, HttpStatus.OK);
-    }
-    @GetMapping("/")
-    public ResponseEntity<List<EtudiantDto>> getAllEtudiants() {
-        List<EtudiantDto> e = serviceEtudiant.getAllEtudiants();
-        return new ResponseEntity<>(e, HttpStatus.OK);
-    }
-    @DeleteMapping("{id}")
-    public ResponseEntity<EtudiantDto> deleteEtudiantById(@PathVariable Long id) {
-        serviceEtudiant.deleteEtudiantById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-    @PutMapping
-    public ResponseEntity<EtudiantDto> updateEtudiant(@RequestBody EtudiantDto etudiantDto) {
-       EtudiantDto e =  serviceEtudiant.updateEtudiant(etudiantDto);
-       return new ResponseEntity<>(e, HttpStatus.OK);
+    public ResponseEntity<EtudiantDto> addEtudiant(@RequestBody EtudiantDto etudiantDto) {
+        EtudiantDto e = etudiantService.createEtudiant(etudiantDto);
+        return new ResponseEntity<>(e, HttpStatus.CREATED);
     }
 
+    @GetMapping("/")
+    public ResponseEntity<List<EtudiantDto>> getAllEtudiants() {
+        List<EtudiantDto> etudiants = etudiantService.getAllEtudiants();
+        return new ResponseEntity<>(etudiants, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteEtudiantById(@PathVariable Long id) {
+        boolean deleted = etudiantService.deleteEtudiantById(id);
+        if (deleted) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity<EtudiantDto> updateEtudiant(@RequestBody EtudiantDto etudiantDto) {
+        EtudiantDto e = etudiantService.updateEtudiant(etudiantDto);
+        if (e != null) {
+            return new ResponseEntity<>(e, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

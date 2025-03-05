@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Entity
 @Table(name="tb_classe")
@@ -19,6 +19,11 @@ public class Classe {
     @Column(length = 50)
     private String nomClasse;
 
+    public Classe(long idClasse, String codeClasse, String nomClasse) {
+        this.idClasse = idClasse;
+        this.codeClasse = codeClasse;
+        this.nomClasse = nomClasse;
+    }
 
     public long getIdClasse() {
         return idClasse;

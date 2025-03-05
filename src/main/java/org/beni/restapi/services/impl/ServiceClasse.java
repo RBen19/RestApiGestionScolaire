@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ServiceClasse  implements IClasse {
+public class ServiceClasse implements IClasse {
     private final ClasseRepository classeRepository;
     @Autowired
     public ServiceClasse(ClasseRepository classRepository) {
@@ -23,10 +23,13 @@ public class ServiceClasse  implements IClasse {
 
     @Override
     public ClasseDto createClasse(ClasseDto classeDto) {
+
         Classe c = ClasseMapper.maptoClasseEntity(classeDto);
         c.setCodeClasse(classeDto.getCodeClasse());
         c.setNomClasse(classeDto.getNomClasse());
+
         classeRepository.save(c);
+
         classeRepository.flush();
 
         return ClasseMapper.maptoClassDto(c);
@@ -34,13 +37,13 @@ public class ServiceClasse  implements IClasse {
 
     @Override
     public ClasseDto getClasseBYId(long idClasse) {
-           Optional<Classe> c  =   classeRepository.findById(idClasse);
-           return c.map(ClasseMapper::maptoClassDto).orElse(null);
+        Optional<Classe> c = classeRepository.findById(idClasse);
+        return c.map(ClasseMapper::maptoClassDto).orElse(null);
     }
 
     @Override
     public List<ClasseDto> getAllClasses() {
-       List<Classe> classeList = classeRepository.findAll();
+        List<Classe> classeList = classeRepository.findAll();
         return classeList.stream().map(ClasseMapper::maptoClassDto).collect(Collectors.toList());
     }
 

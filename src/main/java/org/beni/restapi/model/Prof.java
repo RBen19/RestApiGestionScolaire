@@ -2,10 +2,10 @@ package org.beni.restapi.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "tb_prof")
 public class Prof {
@@ -20,6 +20,18 @@ public class Prof {
     private String email;
     @Column(length = 50)
     private String matriculeProf;
+
+    public Prof(Long idProf, String nom, String prenom, String email, String matriculeProf) {
+        this.idProf = idProf;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.matriculeProf = matriculeProf;
+    }
+
+    public Prof() {
+
+    }
 
     public Long getIdProf() {
         return idProf;

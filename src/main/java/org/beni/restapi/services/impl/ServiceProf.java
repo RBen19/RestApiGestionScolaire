@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ServiceProf  implements IProf {
+public class ServiceProf implements IProf {
     @Autowired
     public ServiceProf(ProfRepository profRepository) {
         this.profRepository = profRepository;
@@ -34,13 +34,13 @@ public class ServiceProf  implements IProf {
     @Override
     public ProfDto getProfById(Long id) {
         Optional<Prof> prof = profRepository.findById(id);
-      return prof.map(ProfMapper::mapToDto).orElse(null);
+        return prof.map(ProfMapper::mapToDto).orElse(null);
     }
 
     @Override
     public List<ProfDto> getAllProf() {
         List<Prof> profs = profRepository.findAll();
-       return profs.stream()
+        return profs.stream()
                 .map(ProfMapper::mapToDto)
                 .collect(Collectors.toList());
     }

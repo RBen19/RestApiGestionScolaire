@@ -22,8 +22,10 @@ public class ServiceEtudiant implements IEtudiant {
         this.etudiantRepository = etudiantRepository;
         this.classeRepository = classeRepository;
     }
+
     private EtudiantRepository etudiantRepository;
     private ClasseRepository classeRepository;
+
     @Override
     @Transactional
     public EtudiantDto createEtudiant(EtudiantDto etudiantDto) {
@@ -32,13 +34,13 @@ public class ServiceEtudiant implements IEtudiant {
         e.setPrenom(etudiantDto.getPrenom());
         e.setEmail(etudiantDto.getEmail());
         e.setMatricule(etudiantDto.getMatricule());
-       Optional<Classe> classe = classeRepository.findById(etudiantDto.getClasse().getIdClasse());
-       if (classe.isPresent()) {
-           e.setClasse(classe.get());
-       }
-     //  e.setClasse(classe);
+        Optional<Classe> classe = classeRepository.findById(etudiantDto.getClasse().getIdClasse());
+        if (classe.isPresent()) {
+            e.setClasse(classe.get());
+        }
+// e.setClasse(classe);
         etudiantRepository.saveAndFlush(e);
-       etudiantRepository.flush();
+        etudiantRepository.flush();
         return EtudiantMapper.maptoEtudiantDto(e);
     }
 
@@ -51,7 +53,7 @@ public class ServiceEtudiant implements IEtudiant {
     @Override
     public List<EtudiantDto> getAllEtudiants() {
         List<Etudiant> etudiants = etudiantRepository.findAll();
-      return  etudiants.stream()
+        return etudiants.stream()
                 .map(EtudiantMapper::maptoEtudiantDto)
                 .collect(Collectors.toList());
     }
@@ -70,8 +72,8 @@ public class ServiceEtudiant implements IEtudiant {
 
     @Override
     public EtudiantDto updateEtudiant(EtudiantDto etudiantDto) {
-        Optional<Etudiant> e  = etudiantRepository.findById(etudiantDto.getIdEtudiant());
-        Etudiant etd  = null;
+        Optional<Etudiant> e = etudiantRepository.findById(etudiantDto.getIdEtudiant());
+        Etudiant etd = null;
         if (e.isPresent()) {
             Etudiant etudiant = EtudiantMapper.maptoEtudiantEntity(etudiantDto);
             etudiant.setNom(etudiantDto.getNom());
@@ -81,6 +83,6 @@ public class ServiceEtudiant implements IEtudiant {
             etd = etudiant;
             etudiantRepository.saveAndFlush(etudiant);
         }
-        return  EtudiantMapper.maptoEtudiantDto(etd);
+        return EtudiantMapper.maptoEtudiantDto(etd);
     }
 }

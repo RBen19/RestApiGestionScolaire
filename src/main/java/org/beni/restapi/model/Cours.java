@@ -2,11 +2,9 @@ package org.beni.restapi.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "tb_cours")
 public class Cours {
@@ -17,6 +15,17 @@ public class Cours {
     private String libelleCours;
     @Column(length = 50)
     private String codeCours;
+
+    public Cours(long idCours, String libelleCours, String codeCours, Prof prof) {
+        this.idCours = idCours;
+        this.libelleCours = libelleCours;
+        this.codeCours = codeCours;
+        this.prof = prof;
+    }
+
+    public Cours() {
+
+    }
 
     public Prof getProf() {
         return prof;
